@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from 'react';
 import './handleWords.styles.css';
-import Swal from 'sweetalert2';
 const HandleWords = ()=>{
     const alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     const randomWordApi = 'https://random-word-api.herokuapp.com/all';
@@ -108,18 +107,7 @@ const HandleWords = ()=>{
                         setCurrentIndex(6);
                         setCurrentInput('');
                         //success
-                        Swal.fire({
-                            title: 'Genius! You guess it right!',
-                            width: 600,
-                            padding: '3em',
-                            color: '#333',
-                            backdrop: `
-                              rgba(0,0,0,0.4)
-                              url("https://sweetalert2.github.io/images/nyan-cat.gif")
-                              left top
-                              no-repeat
-                            `
-                          })
+                        showToaster('Genius! You guess it right!',true);
                         return;
                     }
                     setCurrentIndex(currentIndex+1);
@@ -189,6 +177,3 @@ return(
 )
 }
 export default HandleWords;
-
-
-//GIRLY
