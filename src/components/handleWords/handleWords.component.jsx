@@ -132,6 +132,7 @@ const HandleWords = ()=>{
     }, [currentInput,wordle]);
 return(
     <div className='main_wrapper'>
+        <input type="text" />
         <div className='wrapper'>
         <h1>WORDLE</h1>
         <p>{wordle?'Type your Guess':'Getting word for you...'}</p>
