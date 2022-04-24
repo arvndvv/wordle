@@ -8,6 +8,7 @@ const HandleWords = ()=>{
     const [currentIndex, setCurrentIndex] = useState(0);
     const [wordle,setWordle] = useState('');
     const [toaster,setToaster] = useState('');
+    const inputRef = useRef();
     const [inputMatrix,setinputMatrix]=useState([
         [{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'}],
         [{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'},{letter:'',class:'inActive'}],
@@ -124,15 +125,15 @@ const HandleWords = ()=>{
             setCurrentInput(currentInput+keyPressed)
           }
       
-          document.addEventListener('keydown', handleKeyDown);
+          inputRef.addEventListener('input', handleKeyDown);
       
           return function cleanup() {
-            document.removeEventListener('keydown', handleKeyDown);
+            inputRef.removeEventListener('input', handleKeyDown);
           }
     }, [currentInput,wordle]);
 return(
     <div className='main_wrapper'>
-        <input type="text" />
+        <input type="text" ref={inputRef}/>
         <div className='wrapper'>
         <h1>WORDLE</h1>
         <p>{wordle?'Type your Guess':'Getting word for you...'}</p>
