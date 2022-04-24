@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useRef} from 'react';
 import './handleWords.styles.css';
 const HandleWords = ()=>{
     const alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -125,10 +125,10 @@ const HandleWords = ()=>{
             setCurrentInput(currentInput+keyPressed)
           }
       
-          inputRef.addEventListener('input', handleKeyDown);
+          inputRef.current.addEventListener('keydown', handleKeyDown);
       
           return function cleanup() {
-            inputRef.removeEventListener('input', handleKeyDown);
+            inputRef.current.removeEventListener('keydown', handleKeyDown);
           }
     }, [currentInput,wordle]);
 return(
