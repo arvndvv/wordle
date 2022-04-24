@@ -135,7 +135,7 @@ return(
     <div className='main_wrapper'>
         <input type="text" ref={inputRef}/>
         <div className='wrapper'>
-        <h1>WORDLE</h1>
+        <h1>WORDLEf</h1>
         <p>{wordle?'Type your Guess':'Getting word for you...'}</p>
 
         <div className={"wordle " + (!wordle?'isloading':'')}>
