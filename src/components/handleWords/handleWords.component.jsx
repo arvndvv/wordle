@@ -225,15 +225,11 @@ return(
 
 
         </div>
-   <div className="footer">
-       <div>
-           Drink ☕ & code JS 
-       </div>
+        <div className="footer">
        <div>
        Coded with <span className='heart'>♥</span> <a href='https://arvndvv.github.io'>Aravind</a></div>
        </div>
-       <a target="_blank" href="https://icons8.com/icon/UhociNVMiEEF/clear-symbol">Clear Symbol</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-    </div>
+          </div>
 )
 }
 export default HandleWords;
