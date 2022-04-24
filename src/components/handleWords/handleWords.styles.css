@@ -141,6 +141,7 @@ background: #787c7e;
   h1{
       font-weight: 900;
       font-family: 'Lato', sans-serif;
+      position: relative;
   }
   input{
       width: 100%;
