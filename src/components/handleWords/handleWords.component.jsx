@@ -51,6 +51,24 @@ const HandleWords = ()=>{
             }, 2000);
         }
     }
+    const updateKeyboardData = (keyBoardDummy,letter,className='scrambled',condition='not-equal',match='exact-match')=>{
+        return keyBoardDummy.map(row =>(
+            row.map(col=>{
+                if(col.value===letter){
+                    if(condition==='not-equal'){
+                        if(col.class!== match){
+                            return {...col,class:className}
+                        }
+                    }else if(condition ==='equal'){
+                        if(col.class=== match){
+                            return {...col,class:className}
+                        }
+                    }
+                }
+                return col
+            })
+        ));
+    }
     useEffect(() => {
         (async () => {
             const word = await getValidWord();
@@ -82,29 +100,15 @@ const HandleWords = ()=>{
                     console.log(letter);
                     if(wordle[index] === letter){
                         className = 'exact-match';
-                        keyBoardDummy = keyBoardDummy.map(row =>(
-                            row.map(col=>{
-                                if(col.value===letter && col.class!=='match'){
-                                    return {...col,class:'exact-match'}
-                                }
-                                return col
-                            })
-                        ));
-                    }
+                        keyBoardDummy = updateKeyboardData(keyBoardDummy,letter,'exact-match','not-equal','exact-match');
+                   }
                     else if(wordle.includes(letter)){
                         const countOfLetterInWordle = (wordle.match(new RegExp(letter, "g")) || []).length;
                         const countOfLetterInInput = (lowerCaseInput.match(new RegExp(letter, "g")) || []).length;
                         if(countOfLetterInWordle >= countOfLetterInInput){
                             className = 'scrambled';
-                            keyBoardDummy = keyBoardDummy.map(row =>(
-                                row.map(col=>{
-                                    if(col.value===letter && col.class!=='match'){
-                                        return {...col,class:'scrambled'}
-                                    }
-                                    return col
-                                })
-                            ));
-
+                            keyBoardDummy = updateKeyboardData(keyBoardDummy,letter,'scrambled','not-equal','exact-match');
+                        
                         }
                         else{
                             const InputHasLettersInExactPlaces = wordle.split('').every((wordleLetter,index)=>{
@@ -119,28 +123,15 @@ const HandleWords = ()=>{
                                 const AlreadyMatched = inputMatrixCurrentRow.filter(col=>col.letter===letter);
                                 if(AlreadyMatched.length < countOfLetterInWordle){
                                 className = 'scrambled';
-                                keyBoardDummy = keyBoardDummy.map(row =>(
-                                    row.map(col=>{
-                                        if(col.value===letter && col.class!=='match'){
-                                            return {...col,class:'scrambled'}
-                                        }
-                                        return col
-                                    })
-                                ));
+                                keyBoardDummy = updateKeyboardData(keyBoardDummy,letter,'scrambled','not-equal','exact-match');
+                            
                                 }
 
                             }
                         }
                     }
                     if(className==='not-match'){
-                        keyBoardDummy = keyBoardDummy.map(row =>(
-                            row.map(col=>{
-                                if(col.value===letter && col.class!=='match'){
-                                    return {...col,class:'not-match'}
-                                }
-                                return col
-                            })
-                        ));
+                        keyBoardDummy = updateKeyboardData(keyBoardDummy,letter,'not-match','equal','inactive');
                         
                     }
                     inputMatrixCurrentRow[index].letter=letter;
