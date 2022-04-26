@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react';
 import './handleWords.styles.css';
 import clearImg from '../../assets/img/backspace.svg';
+import WordsData from '../../data/data.json'
 const HandleWords = ()=>{
     const alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    const randomWordApi = 'https://random-word-api.herokuapp.com/all';
     const DictionaryApi = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
     const [currentInput, setCurrentInput] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,17 +28,15 @@ const HandleWords = ()=>{
             const hasMeaning = !!data[0];
             return hasMeaning;
     }
-    const getRandomWord = async (filteredWords)=>{
+    const getRandomWord = (filteredWords)=>{
         return filteredWords[Math.floor(Math.random()*filteredWords.length)];
     }
     const getValidWord = async ()=>{
-        const respose = await fetch(randomWordApi);
-        const words = await respose.json();
-        const filteredWords = words.filter(word=>word.length===5);
+        const filteredWords = WordsData;
         let wordExist = false;
         let word = '';
         while(!wordExist){
-            word = await getRandomWord(filteredWords);
+            word = getRandomWord(filteredWords);
             wordExist = await checkIfWordExist(word);
         }
         return word.toLowerCase();
@@ -209,10 +207,9 @@ return(
             }
         </div>
         <div className="credits">
-            <strong>APIs Used:</strong>
+            <strong>API Used:</strong>
 
                 <a href='https://dictionaryapi.dev/'>Dictionary Api</a>
-                <a href='https://random-word-api.herokuapp.com/home'>Words Api</a>
 
 
         </div>
